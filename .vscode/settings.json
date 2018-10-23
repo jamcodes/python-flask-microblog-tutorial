@@ -1,0 +1,7 @@
+{
+    "python.formatting.blackArgs": [
+        "--line-length",
+        "100"
+    ],
+    "python.pythonPath": "env\\Scripts\\python.exe"
+}
