@@ -1,12 +1,33 @@
 from datetime import datetime
-from app import db
+from flask_login import UserMixin
+import werkzeug.security as ws
+from app import db, login
 
-class User(db.Model):
+"""
+flask-login LoginManager requires the User model class to implement the following properties:
+* is_authenticated
+* is_active
+* is_anonymous
+* get_id
+Those can be implemented manually, but a generic implementation is alos provided in the form of
+a mixin - UserMixin
+"""
+class User(UserMixin, db.Model):
     id = db.Column(db.Integer, primary_key=True)
     username = db.Column(db.String(64), index=True, unique=True)
     email = db.Column(db.String(120), index=True, unique=True)
     password_hash = db.Column(db.String(128))
     posts = db.relationship('Post', backref='author', lazy='dynamic')
+
+    @login.user_loader
+    def load_user(id):
+        return User.query.get(int(id))
+
+    def set_password(self, password):
+        self.password_hash = ws.generate_password_hash(password)
+
+    def check_password(self, password):
+        return ws.check_password_hash(self.password_hash, password)
 
     def __repr__(self):
         return '<User {}>'.format(self.username)
