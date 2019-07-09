@@ -3,5 +3,5 @@
         "--line-length",
         "100"
     ],
-    "python.pythonPath": "env/bin/python"
+    "python.pythonPath": "env\\Scripts\\python.exe"
 }

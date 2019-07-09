@@ -8,8 +8,8 @@ flask-login LoginManager requires the User model class to implement the followin
 * is_authenticated
 * is_active
 * is_anonymous
-* get_id
-Those can be implemented manually, but a generic implementation is alos provided in the form of
+* get_id`
+Those can be implemented manually, but a generic implementation is also provided in the form of
 a mixin - UserMixin
 """
 class User(UserMixin, db.Model):
