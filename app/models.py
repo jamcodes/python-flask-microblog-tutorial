@@ -1,5 +1,6 @@
 from datetime import datetime
 from flask_login import UserMixin
+from hashlib import md5
 import werkzeug.security as ws
 from app import db, login
 
@@ -18,6 +19,8 @@ class User(UserMixin, db.Model):
     email = db.Column(db.String(120), index=True, unique=True)
     password_hash = db.Column(db.String(128))
     posts = db.relationship('Post', backref='author', lazy='dynamic')
+    about_me = db.Column(db.String(140))
+    last_seen = db.Column(db.DateTime, default=datetime.utcnow)
 
     @login.user_loader
     def load_user(id):
@@ -28,6 +31,22 @@ class User(UserMixin, db.Model):
 
     def check_password(self, password):
         return ws.check_password_hash(self.password_hash, password)
+
+    def avatar(self, size):
+        '''
+        User profile avatars are provided through "Gravatar" - a service providing avatars
+        mapped to user emails accessible via the user's email MD5 hash:
+        https://www.gravatar.com/avatar/hashlib.md5(b'example@email.com').hexdigest()
+        will return an avatar set for the 'example@email.com' user
+        - an `s` parameter can be specified to determine the avatar size:
+        /avatar/some-md5-here?s=128   -> 128x128 avatar
+        - a `d` parameter determines the type of image returned if no avatar was set for
+        a particular user (or the user is not registered with the service).
+        `d=identicon` returns an image unique to the given md5
+        '''
+        digest = md5(self.email.lower().encode('utf-8')).hexdigest()
+        return 'https://www.gravatar.com/avatar/{}?d=identicon&s={}'.format(digest, size)
+
 
     def __repr__(self):
         return '<User {}>'.format(self.username)

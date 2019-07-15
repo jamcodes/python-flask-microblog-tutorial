@@ -44,7 +44,10 @@
             "request": "launch",
             "module": "flask",
             "env": {
-                "FLASK_APP": "microblog"
+                "FLASK_APP": "microblog",
+                "FLASK_DEBUG": 0,
+                "MAIL_SERVER": "localhost",
+                "MAIL_PORT": 8025
             },
             "args": [
                 "run",
