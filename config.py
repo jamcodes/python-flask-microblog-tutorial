@@ -7,8 +7,8 @@ class Config:
     SQLALCHEMY_DATABASE_URI = os.environ.get('DATABASE_URL') or \
         'sqlite:///' + os.path.join(_basedir, 'app.db')
     SQLALCHEMY_TRACK_MODIFICATIONS = False
-    # Add email server details to be able to receive emial notifications
-    # about errors
+    # Add email server details to be able to receive emial notifications about errors
+    # These email server config variables are compatible with flask-mail
     MAIL_SERVER = os.environ.get('MAIL_SERVER')
     MAIL_PORT = int(os.environ.get('MAIL_PORT') or 25)
     MAIL_USE_TLS = os.environ.get('MAIL_USE_TLS') is not None
