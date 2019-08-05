@@ -2,6 +2,7 @@ from app import app
 import os
 import click
 
+# Flask's interface is based in `Click` and can be extended quite easily
 
 @app.cli.group()
 def translate():
