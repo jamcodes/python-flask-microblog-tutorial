@@ -1,4 +1,4 @@
-from app import app, routes, models, errors, db
+from app import app, routes, models, errors, db, cli
 from app.models import User, Post
 import os
 import logging
