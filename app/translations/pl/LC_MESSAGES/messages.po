@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2019-08-05 20:40+0200\n"
+"POT-Creation-Date: 2019-08-07 19:37+0200\n"
 "PO-Revision-Date: 2019-08-05 20:40+0200\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: pl\n"
@@ -35,72 +35,88 @@ msgstr "Haslo"
 msgid "Remember Me"
 msgstr "Zapamietaj"
 
-#: app/forms.py:12 app/routes.py:56
+#: app/forms.py:12 app/routes.py:62
 msgid "Sign In"
 msgstr "Zaloguj sie"
 
-#: app/routes.py:26
+#: app/routes.py:32
 msgid "Your post is now live!"
 msgstr "Twoj post zostal opublikowany"
 
-#: app/routes.py:34
+#: app/routes.py:40
 msgid "Home Page"
 msgstr "Strona domowa"
 
-#: app/routes.py:46
+#: app/routes.py:52
 msgid "Invalid username or password"
 msgstr "Nieprawidlowa nazwa uzytkownika lub haslo"
 
-#: app/routes.py:74
+#: app/routes.py:80
 msgid "Congratulations, you are now a registered user!"
 msgstr "Gratulacje! Jestes teraz zarejestrowanym uzytkownikiem"
 
-#: app/routes.py:76
+#: app/routes.py:82
 msgid "Register"
 msgstr "Zarejestruj sie"
 
-#: app/routes.py:98
+#: app/routes.py:104
 msgid "Your changes have been saved"
 msgstr "Twoje zmiany zostaly zapisane"
 
-#: app/routes.py:103
+#: app/routes.py:109
 msgid "Edit Profile"
 msgstr "Edytuj profil"
 
-#: app/routes.py:123 app/routes.py:140
+#: app/routes.py:129 app/routes.py:146
 #, python-format
 msgid "User %(username)s not found."
 msgstr "Uzytkownik %(username)s nie zostal znaleziony"
 
-#: app/routes.py:126
+#: app/routes.py:132
 msgid "You cannot follow yourself!"
 msgstr "Nie mozesz sledzic samego siebie!"
 
-#: app/routes.py:131
+#: app/routes.py:137
 #, python-format
 msgid "You are now following %(username)s!"
 msgstr "Sledzisz teraz %(username)s!"
 
-#: app/routes.py:143
+#: app/routes.py:149
 msgid "You can not unfollow yourself!"
 msgstr "Nie mozesz przestac sledzic samego siebie!"
 
-#: app/routes.py:147
+#: app/routes.py:153
 #, python-format
 msgid "You are no longer following %(username)s."
 msgstr "Nie sledzisz juz %(username)s."
 
-#: app/routes.py:160
+#: app/routes.py:166
 msgid "Check your email for instructions on how to reset your password"
 msgstr "Wyslano email z instrukcjami jak zresetowac haslo."
 
-#: app/routes.py:162
+#: app/routes.py:168
 msgid "Reset Password"
 msgstr "Zresetuj haslo"
 
-#: app/routes.py:176
+#: app/routes.py:182
 msgid "Your password has been reset"
 msgstr "Twoje haslo zostalo zresetowane"
+
+#: app/translate.py:9
+msgid "Error: the translation service is not configured."
+msgstr "Błąd: serwis tłumacza nie jest skonfigurowany."
+
+#: app/translate.py:16
+msgid "Error: the translation service failed."
+msgstr "Błąd serwisu tłumacza"
+
+#: app/templates/_post.html:22
+msgid "Translate"
+msgstr "Tłumacz"
+
+#: app/templates/base.html:66
+msgid "Error: Could not contact server."
+msgstr "Błąd: nieudana próba kontaktu z serwerem."
 
 #: app/templates/index.html:5
 #, python-format

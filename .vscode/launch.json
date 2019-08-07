@@ -47,7 +47,8 @@
                 "FLASK_APP": "microblog",
                 "FLASK_DEBUG": 0,
                 "MAIL_SERVER": "localhost",
-                "MAIL_PORT": 8025
+                "MAIL_PORT": 8025,
+                "MS_TRANSLATOR_KEY": "bd79afba77b949e08f4c1690e957ae6e"
             },
             "args": [
                 "run",

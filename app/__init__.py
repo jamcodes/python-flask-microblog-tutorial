@@ -40,6 +40,6 @@ manually. Once translated the .po file needs to be compiled:
   $ pybabel compile -d app/translations
 Only example translations are provided for the index home page.
 '''
-    return request.accept_languages.best_match(app.config['LANGUAGES'])
+    # return request.accept_languages.best_match(app.config['LANGUAGES'])
     # For debugging just return the desired locale
-    # return 'pl'
+    return 'pl'

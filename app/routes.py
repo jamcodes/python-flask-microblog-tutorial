@@ -1,10 +1,12 @@
 from app import app
-from flask import render_template, flash, redirect, url_for, request, g
+from app.translate import translate
+from flask import render_template, flash, redirect, url_for, request, g, jsonify
 from flask_login import current_user, login_user, logout_user, login_required
 from werkzeug import urls
 from app import forms, models, forms, db, email
 from datetime import datetime
 from flask_babel import _, get_locale
+from guess_language import guess_language
 
 
 @app.before_request
@@ -21,7 +23,10 @@ def before_request():
 def index():
     form = forms.PostForm()
     if form.validate_on_submit():
-        post = models.Post(body=form.post.data, author=current_user)
+        language = guess_language(form.post.data)
+        if language == 'UNKNOWN' or len(language) > 5:
+            language = ''
+        post = models.Post(body=form.post.data, author=current_user, language=language)
         db.session.add(post)
         db.session.commit()
         flash(_('Your post is now live!'))
@@ -177,3 +182,11 @@ def reset_password(token):
         flash(_('Your password has been reset'))
         return redirect(url_for('login'))
     return render_template('reset_password.html', form=form)
+
+
+@app.route('/translate', methods=['POST'])
+def translate_text():
+    return jsonify({'text': translate(request.form['text'],
+                                      request.form['source_language'],
+                                      request.form['dest_language'])}
+                                      )
