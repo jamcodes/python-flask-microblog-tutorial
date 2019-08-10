@@ -1,17 +1,26 @@
 from datetime import datetime, timedelta
 import unittest
-from app import app, db, models
+from flask import current_app
+from app import db, models, create_app
+from config import Config
+
+
+class TestConfig(Config):
+    TESTING = True
+    SQLALCHEMY_DATABASE_URI = 'sqlite://'
 
 
 class UserModelCase(unittest.TestCase):
     def setUp(self):
-        # Configure SQLAlchemy to use in-memory SQLite database for testing
-        app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite://'
+        self.app = create_app(TestConfig)
+        self.app_context = self.app.app_context()
+        self.app_context.push()
         db.create_all()
 
     def tearDown(self):
         db.session.remove()
         db.drop_all()
+        self.app_context.pop()
 
     def test_password_hashing(self):
         u = models.User(username='Susan')
@@ -58,10 +67,18 @@ class UserModelCase(unittest.TestCase):
 
         # create four posts
         now = datetime.utcnow()
-        p1 = models.Post(body="post from john", author=u1, timestamp=now + timedelta(seconds=1))
-        p2 = models.Post(body="post from susan", author=u2, timestamp=now + timedelta(seconds=4))
-        p3 = models.Post(body="post from mary", author=u3, timestamp=now + timedelta(seconds=3))
-        p4 = models.Post(body="post from david", author=u4, timestamp=now + timedelta(seconds=2))
+        p1 = models.Post(body="post from john",
+                         author=u1,
+                         timestamp=now + timedelta(seconds=1))
+        p2 = models.Post(body="post from susan",
+                         author=u2,
+                         timestamp=now + timedelta(seconds=4))
+        p3 = models.Post(body="post from mary",
+                         author=u3,
+                         timestamp=now + timedelta(seconds=3))
+        p4 = models.Post(body="post from david",
+                         author=u4,
+                         timestamp=now + timedelta(seconds=2))
         db.session.add_all([p1, p2, p3, p4])
         db.session.commit()
 
@@ -85,4 +102,3 @@ class UserModelCase(unittest.TestCase):
 
 if __name__ == '__main__':
     unittest.main(verbosity=2)
-
