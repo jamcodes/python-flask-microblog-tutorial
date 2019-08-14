@@ -3,7 +3,7 @@
         "--line-length",
         "100"
     ],
-    "python.pythonPath": "env\\Scripts\\python.exe",
+    "python.pythonPath": "env/bin/python",
     "python.testing.unittestArgs": [
         "-v",
         "-s",
